@@ -9,8 +9,9 @@ class Article extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
 
-    public function tags()
+    public function tags(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Tag::class);
     }

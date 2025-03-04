@@ -19,6 +19,7 @@ use App\Http\Controllers\AuthController;
 */
 
 Route::apiResource('article', ArticleController::class);
+Route::get('article/{id}/tags', [ArticleController::class, 'tags']);
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
