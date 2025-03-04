@@ -1,0 +1,88 @@
+.article-container {
+    max-width: 390px; /* Largura exata do mobile */
+    margin: auto;
+    font-family: Arial, sans-serif;
+    background: #FFFFD9;
+    padding: 20px;
+    height: 100vh; /* Ocupa toda a tela */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 22px; /* Ligeiramente menor para mobile */
+    font-weight: bold;
+  }
+  
+  .article-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group {
+    margin-bottom: 15px; /* Menos espaço para caber melhor */
+  }
+  
+  label {
+    font-weight: bold;
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  input, textarea {
+    width: 96%;
+    border: none;
+    border-bottom: 2px solid black;
+    padding: 10px; /* Melhor espaçamento para toque */
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+  }
+  
+  textarea {
+    height: 100px; /* Um pouco maior para facilitar a escrita */
+    resize: none;
+  }
+  
+  .submit-button {
+    background: #a38f78;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 20px;
+    font-size: 14px;
+    transition: background 0.3s ease;
+  }
+  
+  .submit-button:hover {
+    background: #8c7761;
+  }
+  
+  /* Ajustes específicos para mobile */
+  @media screen and (max-width: 400px) {
+    .article-container {
+      padding: 15px;
+    }
+  
+    h1 {
+      font-size: 20px;
+    }
+  
+    input, textarea {
+      font-size: 13px;
+      padding: 8px;
+    }
+  
+    .submit-button {
+      padding: 10px;
+      font-size: 13px;
+    }
+  }
+  
