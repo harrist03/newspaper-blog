@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -13,7 +14,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return Article::all();
+        return Article::all()->load('tags');
     }
 
     /**
@@ -37,14 +38,14 @@ class ArticleController extends Controller
                         'mediaURL' => $request->input('mediaURL'),
                         'leadStory' => $request->input('leadStory'),
         ]);
-        
+
         $tags = explode(",", $request->input("tags"));
         foreach($tags as $t)  {
             $t = trim($t);
             $tag = Tag::where("name", $t)->first();
             if($tag == false)
                 $tag = Tag::create(["name" => $t]);
-            $newArticle->tags->attach($tag->id);
+            $newArticle->tags()->attach($tag->id);
         }
 
         return response()->json($newArticle, 201);
@@ -55,7 +56,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        return $article;
+        return $article->load('tags');
     }
 
     /**
