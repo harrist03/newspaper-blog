@@ -4,20 +4,30 @@ import logo from '../../assets/logo/Logo.png';
 function Login() {
     return (
         <>
-            <div className="login">
+            {/* Border */}
+            <div className="corner top-left"></div>
+            <div className="corner bottom-right"></div>
+
+            <div>
                 <div>
                     <img src={logo} className='image'></img>
                 </div>
                 <br/>
                 <form>
-                    <input name="query" placeholder="Name"/>
-                    <br/>
-                    <input name="query" placeholder="Password" />
-                    <br/>
-                    <button type="submit" className="button" >Login</button>
+                    <div className="input-group">
+                        <input type="email" placeholder="Email" />
+                    </div>
+
+                    <div className="input-group">
+                        <input type="password" placeholder="Password" />
+                    </div>
+
+                    <p className="create-account">Create Account</p>
+
+                    <button className="login-btn">Login</button>
                 </form>
             </div>
-       </>
+        </>
     )
 }
 
