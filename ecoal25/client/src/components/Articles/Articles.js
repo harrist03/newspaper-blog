@@ -23,7 +23,7 @@ function Articles() {
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
-        return new Intl.DateTimeFormat('fr-FR', {
+        return new Intl.DateTimeFormat('en-EN', {
             year: 'numeric',
             month: 'long',
             day: 'numeric',
@@ -32,11 +32,15 @@ function Articles() {
         }).format(date);
     };
 
-    if (loading) return <p className="loading">Chargement...</p>;
-    if (error) return <p className="error">Erreur: {error}</p>;
+    if (loading) return <p className="loading">Loading...</p>;
+    if (error) return <p className="error">Error: {error}</p>;
 
     function handleClick() {
        navigate("/newarticle");
+    }
+
+    function handleArticleClick(id) {
+        navigate("/article/" + id);
     }
 
     return (
@@ -48,7 +52,7 @@ function Articles() {
             <div className="articles-list">
                 {articles.length > 0 ? (
                     articles.map((article) => (
-                        <div key={article.id} className="article-card">
+                        <div key={article.id} className="article-card" onClick={()=>handleArticleClick(article.id)}>
                             {article.mediaURL && (
                                 <img
                                     src={article.mediaURL}
