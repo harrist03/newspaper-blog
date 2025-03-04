@@ -1,11 +1,12 @@
-import './login.css';
- 
+import './Login.css';
+import logo from '../../assets/logo/Logo.png';
+
 function Login() {
     return (
         <>
             <div>
-                <div>            
-                    <img src='../src/assets/logo/Logo.png' className='image'></img>
+                <div>
+                    <img src={logo} className='image'></img>
                 </div>
                 <br/>
                 <form>
