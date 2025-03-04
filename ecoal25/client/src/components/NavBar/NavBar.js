@@ -20,16 +20,16 @@ function NavBar() {
         <nav className={`${styles.navbar} ${pressed ? styles.open : ""}`}>
             <ul>
                 <li>
-                    <Link to="/">Home</Link>
+                    <Link onClick={handleClick} to="/">Home</Link>
                 </li>
                 <li>
-                <Link to="/login">Login / Register</Link>
+                <Link onClick={handleClick} to="/login">Login / Register</Link>
                     </li>
                     <li>
-                        <Link to="/article">Articles</Link>
+                        <Link onClick={handleClick} to="/article">Articles</Link>
                     </li>
                     <li>
-                        <Link to="/newArticle">Create an article</Link>
+                        <Link onClick={handleClick} to="/newArticle">Create an article</Link>
                     </li>
                 </ul>
             </nav>

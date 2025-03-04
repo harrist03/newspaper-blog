@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Articles.css';
+import {useNavigate} from 'react-router-dom';
 
 function Articles() {
+    const navigate = useNavigate();
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/api/article') 
+        axios.get('http://127.0.0.1:8000/api/article')
             .then((response) => {
                 setArticles(response.data);
                 setLoading(false);
@@ -33,20 +35,24 @@ function Articles() {
     if (loading) return <p className="loading">Chargement...</p>;
     if (error) return <p className="error">Erreur: {error}</p>;
 
+    function handleClick() {
+       navigate("/newarticle");
+    }
+
     return (
         <div className="home-container">
             <header className="header">
                 <h1>Articles</h1>
-                <button className="add-article">+ Ajouter un article</button>
+                <button className="add-article" onClick={handleClick} >+ Ajouter un article</button>
             </header>
             <div className="articles-list">
                 {articles.length > 0 ? (
                     articles.map((article) => (
                         <div key={article.id} className="article-card">
                             {article.mediaURL && (
-                                <img 
-                                    src={article.mediaURL} 
-                                    alt={article.mediaType || 'Article Image'} 
+                                <img
+                                    src={article.mediaURL}
+                                    alt={article.mediaType || 'Article Image'}
                                     className="article-image"
                                 />
                             )}
