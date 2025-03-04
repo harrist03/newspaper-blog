@@ -1,7 +1,7 @@
 import './Login.css';
 import logo from '../../assets/logo/Logo.png';
 
-function Login() {
+function Account() {
     return (
         <>
             {/* Border */}
@@ -12,16 +12,9 @@ function Login() {
                 <div>
                     <img src={logo} className='image'></img>
                 </div>
-                <br/>
+                <br />
                 <form>
-                    <div className="input-group">
-                        <input type="email" placeholder="Email" />
-                    </div>
-
-                    <div className="input-group">
-                        <input type="password" placeholder="Password" />
-                    </div>
-
+                   
                     <p className="create-account">Create Account</p>
 
                     <button className="login-btn">Login</button>
@@ -31,4 +24,4 @@ function Login() {
     )
 }
 
-export default Login
+export default Account
