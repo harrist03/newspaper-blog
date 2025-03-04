@@ -27,6 +27,7 @@ class ArticleController extends Controller
             'thumbnailURL' => 'required|string',
             'mediaType' => 'required|string',
             'mediaURL' => 'required|string',
+            "tags" => 'string'
         ]);
 
         $newArticle = Article::create(['title' => $request->input('title'),
@@ -36,7 +37,16 @@ class ArticleController extends Controller
                         'mediaURL' => $request->input('mediaURL'),
                         'leadStory' => $request->input('leadStory'),
         ]);
-        $newArticle->update(['id' => $newArticle->id]);
+        
+        $tags = explode(",", $request->input("tags"));
+        foreach($tags as $t)  {
+            $t = trim($t);
+            $tag = Tag::where("name", $t)->first();
+            if($tag == false)
+                $tag = Tag::create(["name" => $t]);
+            $newArticle->tags->attach($tag->id);
+        }
+
         return response()->json($newArticle, 201);
     }
 

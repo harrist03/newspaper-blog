@@ -13,7 +13,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        return Tag::all();
     }
 
     /**
@@ -21,7 +21,17 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $v = $request->validate([
+            'name'=>'required|string',
+        ]);
+
+        $newTag = Tag::create(['name' => $request->input('name')
+        
+        ]);
+
+    $newTag->update(['id' => $newTag->id]);
+    return response()->json($newTag, 201);
+
     }
 
     /**
