@@ -4,7 +4,7 @@ import logo from '../../assets/logo/Logo.png';
 function Login() {
     return (
         <>
-            <div>
+            <div className="login">
                 <div>
                     <img src={logo} className='image'></img>
                 </div>
