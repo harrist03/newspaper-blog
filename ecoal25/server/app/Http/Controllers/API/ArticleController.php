@@ -31,8 +31,8 @@ class ArticleController extends Controller
             "tags" => 'string'
         ]);
 
-        $hashName = $request->file('thumbnailURL')->hashName();
-        $filename = $request->file('thumbnailURL')->storeAs('public/storage/images', $hashName);
+//        $hashName = $request->file('thumbnailURL')->hashName();
+//        $filename = $request->file('thumbnailURL')->storeAs('public/storage/images', $hashName);
 
         $newArticle = Article::create(['title' => $request->input('title'),
                         'content' => $request->input('content'),
@@ -96,5 +96,10 @@ class ArticleController extends Controller
     {
         $article->delete();
         return response()->json(null, 204);
+    }
+
+    public function search($search)
+    {
+        return Article::where('title', 'like', '%'.$search.'%')->get();
     }
 }

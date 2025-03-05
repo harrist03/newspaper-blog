@@ -26,7 +26,7 @@ class TagController extends Controller
         ]);
 
         $newTag = Tag::create(['name' => $request->input('name')
-        
+
         ]);
 
     $newTag->update(['id' => $newTag->id]);
@@ -57,4 +57,6 @@ class TagController extends Controller
     {
         //
     }
+
+
 }

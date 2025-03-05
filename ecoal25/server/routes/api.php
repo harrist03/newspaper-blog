@@ -21,6 +21,7 @@ use App\Http\Controllers\AuthController;
 
 Route::apiResource('article', ArticleController::class);
 Route::get('article/{id}/tags', [ArticleController::class, 'tags']);
+Route::get("article/search/{search}", [ArticleController::class, 'search']);
 
 Route::apiResource('tag', TagController::class);
 

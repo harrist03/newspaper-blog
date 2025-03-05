@@ -27,7 +27,7 @@ function NewArticle() {
         data.append('thumbnailURL', formData.file);
         data.append("mediaType", "image");
         data.append('mediaURL', formData.file);
-        data.append("leadStory", 0)
+        data.append("leadStory", 0);
 
         try {
             const response = await axios.post("http://localhost:8000/api/article", data, {
