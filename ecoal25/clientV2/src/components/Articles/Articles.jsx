@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./Articles.css";
+import { useNavigate } from "react-router-dom";
+import Search from "../Search/Search";
 import './Articles.css';
 import {useNavigate} from 'react-router-dom';
 import APP_URL from "../../constant.js";
@@ -7,53 +10,71 @@ import APP_URL from "../../constant.js";
 function Articles() {
     const navigate = useNavigate();
     const [articles, setArticles] = useState([]);
+    const [filteredArticles, setFilteredArticles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/api/article')
+        axios
+            .get("http://127.0.0.1:8000/api/article")
             .then((response) => {
                 setArticles(response.data);
+                setFilteredArticles(response.data);
                 setLoading(false);
             })
             .catch((err) => {
-                setError(err.message);
+                setError("Impossible de charger les articles. Vérifiez la connexion.");
                 setLoading(false);
             });
     }, []);
 
+    const handleSearch = (tagName) => {
+        if (tagName === "") {
+            setFilteredArticles(articles);
+        } else {
+            axios
+                .get(`http://127.0.0.1:8000/api/search/${tagName}`)
+                .then((response) => setFilteredArticles(response.data))
+                .catch((err) => console.error("Erreur lors du filtrage:", err));
+        }
+    };
+
     const formatDate = (dateString) => {
         const date = new Date(dateString);
-        return new Intl.DateTimeFormat('en-EN', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
+        return new Intl.DateTimeFormat("fr-FR", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
         }).format(date);
     };
 
-    if (loading) return <p className="loading">Loading...</p>;
-    if (error) return <p className="error">Error: {error}</p>;
+    const handleClick = () => navigate("/newarticle");
+    const handleArticleClick = (id) => navigate("/article/" + id);
 
-    function handleClick() {
-       navigate("/newarticle");
-    }
-
-    function handleArticleClick(id) {
-        navigate("/article/" + id);
-    }
+    if (loading) return <p className="loading">Chargement...</p>;
+    if (error) return <p className="error">{error}</p>;
 
     return (
         <div className="home-container">
             <header className="header">
                 <h1>Articles</h1>
-                <button className="add-article" onClick={handleClick} >+ Ajouter un article</button>
+                <button className="add-article" onClick={handleClick}>
+                    + Ajouter un article
+                </button>
             </header>
+
+            <Search onSearch={handleSearch} />
+
             <div className="articles-list">
-                {articles.length > 0 ? (
-                    articles.map((article) => (
-                        <div key={article.id} className="article-card" onClick={()=>handleArticleClick(article.id)}>
+                {filteredArticles.length > 0 ? (
+                    filteredArticles.map((article) => (
+                        <div
+                            key={article.id}
+                            className="article-card"
+                            onClick={() => handleArticleClick(article.id)}
+                        >
                             {article.mediaURL && (
                                 <img
                                     src={APP_URL+article.mediaURL}
@@ -67,7 +88,9 @@ function Articles() {
                                 {article.tags && article.tags.length > 0 && (
                                     <div className="tags-container">
                                         {article.tags.map((tag) => (
-                                            <span key={tag.id} className="tag">{tag.name}</span>
+                                            <span key={tag.id} className="tag">
+                                                {tag.name}
+                                            </span>
                                         ))}
                                     </div>
                                 )}
@@ -83,6 +106,3 @@ function Articles() {
 }
 
 export default Articles;
-
-
-
