@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Articles.css';
 import {useNavigate} from 'react-router-dom';
+import APP_URL from "../../constant.js";
 
 function Articles() {
     const navigate = useNavigate();
@@ -55,7 +56,7 @@ function Articles() {
                         <div key={article.id} className="article-card" onClick={()=>handleArticleClick(article.id)}>
                             {article.mediaURL && (
                                 <img
-                                    src={article.mediaURL}
+                                    src={APP_URL+article.mediaURL}
                                     alt={article.mediaType || 'Article Image'}
                                     className="article-image"
                                 />

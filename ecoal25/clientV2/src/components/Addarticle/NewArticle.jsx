@@ -3,9 +3,11 @@ import {useState} from "react";
 import axios from "axios";
 
 function NewArticle() {
+    const [file, setFile] = useState(null);
+    const [name, setName] = useState("");
+    const [status, setStatus] = useState("");
     const [formData, setFormData] = useState({
         title: "",
-        file: null,
         content : "",
         tags: "",
         })
@@ -18,6 +20,7 @@ function NewArticle() {
     }
 
     async function handleSubmit(e) {
+        setStatus(""); // Reset status
         e.preventDefault();
 
         const data = new FormData();
@@ -26,7 +29,7 @@ function NewArticle() {
         data.append('tags', formData.tags);
         data.append('thumbnailURL', formData.file);
         data.append("mediaType", "image");
-        data.append('mediaURL', formData.file);
+        data.append('mediaURL', file);
         data.append("leadStory", 0);
 
         try {
@@ -55,7 +58,7 @@ function NewArticle() {
 
                     <div className="form-group">
                         <label>Photo / video / sound :</label>
-                        <input type="file" placeholder="Url / file / etc..." name="file" onChange={handleChange} />
+                        <input type="file" placeholder="Url / file / etc..." name="file" onChange={(e) => setFile(e.target.files[0])} />
                     </div>
 
                     <div className="form-group">
