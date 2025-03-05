@@ -31,6 +31,9 @@ class ArticleController extends Controller
             "tags" => 'string'
         ]);
 
+        $hashName = $request->file('thumbnailURL')->hashName();
+        $filename = $request->file('thumbnailURL')->storeAs('public/storage/images', $hashName);
+
         $newArticle = Article::create(['title' => $request->input('title'),
                         'content' => $request->input('content'),
                         'thumbnailURL' => $request->input('thumbnailURL'),
