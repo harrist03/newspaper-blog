@@ -6,6 +6,7 @@ import Login from "./components/login_page/Login";
 import NavBar from "./components/NavBar/NavBar";
 import Articles from "./components/Articles/Articles";
 import Article from "./components/Article/Article";
+import Search from "./components/Search/Search";
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                     <Route path="/article" element={<Articles/>}/>
                     <Route path="/article/:id" element={<Article/>}/>
                     <Route path="/newarticle" element={<NewArticle/>}/>
+                    <Route path="/search" element={<Search/>}/>
                 </Routes>
             </div>
         </>
