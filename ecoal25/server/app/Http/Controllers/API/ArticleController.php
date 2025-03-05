@@ -98,8 +98,16 @@ class ArticleController extends Controller
         return response()->json(null, 204);
     }
 
-    public function search($search)
+    public function search( $slugTag)
     {
-        return Article::where('title', 'like', '%'.$search.'%')->get();
+        $tags = Tag::where('name', $slugTag)->get();
+        if (count($tags) == 0)
+            return [];
+        $articles = $tags[0]->articles;
+          return $articles;
+    }
+
+    public function searchText($search) {
+        return Article::where('title', 'like', "%".$search."%")->get();
     }
 }
