@@ -41,7 +41,7 @@ function Articles() {
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
-        return new Intl.DateTimeFormat("fr-FR", {
+        return new Intl.DateTimeFormat("en-EN", {
             year: "numeric",
             month: "long",
             day: "numeric",
@@ -54,8 +54,8 @@ function Articles() {
         navigate("/article/" + $id)
     }
 
-    if (loading) return <p className="loading">Chargement...</p>;
-    if (error) return <p className="error">Erreur : {error}</p>;
+    if (loading) return <p className="loading">Loading...</p>;
+    if (error) return <p className="error">Error : {error}</p>;
 
     return (
         <div className="home-container">
@@ -66,12 +66,12 @@ function Articles() {
                 <h1>Articles</h1>
                 {IsLoggedIn ? (
                 <button className="add-article" onClick={() => navigate("/newarticle")}>
-                    + Ajouter un article
+                    + Add an article
                 </button>
                 ) : (
                     <></>
                 )}
-                
+
             </header>
 
             <Search onSearch={handleSearch} />

@@ -26,6 +26,18 @@
     margin-bottom: 15px;
   }
 
+  .form-group input[type=file] {
+      display: none;
+  }
+
+.form-group label[for=file] {
+    background-color: #D3C1AE;
+    padding: 1rem 0.5rem;
+    border-radius: 25px;
+    color: white;
+}
+
+
   label {
     font-weight: bold;
     display: block;

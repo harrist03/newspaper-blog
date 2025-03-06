@@ -23,12 +23,12 @@ function Search({ onSearch }) {
         <div className="search-container">
             <input
                 type="text"
-                placeholder="Rechercher un article par tag"
+                placeholder="Search an article with a tag"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)} 
             />
-            <button onClick={handleSearch}>Rechercher</button>
-            <button onClick={() => onSearch("")}>Réinitialiser</button>
+            <button onClick={handleSearch}>Search</button>
+            <button onClick={() => onSearch("")}>Restart</button>
 
             <div className="tags-list">
                 {tags.map((tag) => (
