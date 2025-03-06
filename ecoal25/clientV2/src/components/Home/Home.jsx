@@ -43,14 +43,18 @@ function Home() {
                     <div className="articles-grid">
                         {articles.map(article => (
                             <div key={article.id} className="article-card">
-                                {article.thumbnailURL && (
-                                    <img
-                                        src={article.thumbnailURL !== 'default-thumbnail.jpg'
-                                            ? article.thumbnailURL
-                                            : 'https://via.placeholder.com/300x200?text=No+Image'}
-                                        alt={article.title}
-                                        className="article-thumbnail"
-                                    />
+                                {article.mediaURL && (
+                                    <div className="article-image-container">
+                                        <img
+                                            src={`http://localhost:8000${article.mediaURL}`}
+                                            alt={article.title}
+                                            className="article-thumbnail"
+                                            onError={(e) => {
+                                                e.target.onerror = null;
+                                                e.target.src = 'https://via.placeholder.com/300x200?text=No+Image';
+                                            }}
+                                        />
+                                    </div>
                                 )}
                                 <div className="article-content">
                                     <h3>{article.title}</h3>
