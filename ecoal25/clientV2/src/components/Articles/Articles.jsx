@@ -54,6 +54,9 @@ function Articles() {
 
     return (
         <div className="home-container">
+            <div className="arrow" onClick={() => navigate(-1)}>
+             <box-icon name='left-arrow-alt' size="lg"></box-icon>
+        </div>
             <header className="header">
                 <h1>Articles</h1>
                 <button className="add-article" onClick={() => navigate("/newarticle")}>
