@@ -35,6 +35,10 @@ function NavBar() {
                             <Link onClick={handleClick} to="/">Home</Link>
                         </li>
 
+                        <li>
+                            <Link onClick={handleClick} to="/article">Articles</Link>
+                        </li>
+
                         {IsLoggedIn ? (
                             <>
                                 <li>
@@ -46,9 +50,7 @@ function NavBar() {
                                 <Link onClick={handleClick} to="/login">Login / Register</Link>
                             </li>
                         )}
-                        <li>
-                            <Link onClick={handleClick} to="/article">Articles</Link>
-                        </li>
+                        
                         {IsLoggedIn && (
                             <li>
                                 <Link onClick={handleClick} to="/newarticle">Create Article</Link>
