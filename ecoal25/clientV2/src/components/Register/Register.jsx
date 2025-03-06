@@ -10,7 +10,7 @@ function Register() {
 
             <img src={logo} className={styles.image} alt="Logo" />
             <br />
-            <h1>Create Account</h1>
+            <h1 className={styles.title}>Create Account</h1>
             <form>
                 <div className={styles.inputGroup}>
                     <input type="text" placeholder="Name" />
@@ -27,8 +27,8 @@ function Register() {
                 <div className={styles.inputGroup}>
                     <input type="password" placeholder="Password" />
                 </div>
-
-                <button className={styles.loginbtn}>Create Account</button>
+                <p className={styles.loginRedirect}><a href="/login">Login</a></p>
+                <button className={styles.createAccountbtn}>Create Account</button>
             </form>
         </div>
     );
