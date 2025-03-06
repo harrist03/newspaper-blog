@@ -1,0 +1,102 @@
+.home-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure it takes the full viewport height */
+    overflow-x: hidden;
+}
+
+.main-page {
+    flex: 1; /* This pushes the footer to the bottom */
+}
+
+.footer-section {
+    background-color: #3D211A;
+    color: #fff;
+    padding: 40px 20px;
+    border-top: 5px solid #5A382B;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 120px;
+}
+
+.logo h1 {
+    font-size: 2.5rem;
+    color: #333;
+    font-weight: bold;
+    display: block;
+    margin: 1rem 0; /* Add some margin */
+}
+
+.logo img {
+    max-width: 300px;
+    height: auto;
+}
+
+.underline {
+    font-weight: bold;
+    width: 90%;
+    margin: 0 auto;
+    border-top: 3px solid rgba(0, 0, 0, 0.3);
+    margin-top: 100px;
+}
+
+.footer-section {
+    background-color: #3D211A; /* Matching your navbar color */
+    color: #fff;
+    padding: 22px 10px;
+    border-top: 5px solid #5A382B; /* Slightly lighter than the main color */
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+
+/* Add these column styles if you want a multi-column footer */
+.footer-column {
+    flex: 1;
+    min-width: 180px;
+    margin-bottom: 10px;
+}
+
+.footer-column h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;  
+}
+
+.footer-column li {
+    margin-bottom: 8px;
+}
+
+.footer-column a {
+    color: #f8f8f8;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-column a:hover {
+    color: #ccc;
+}
+
+.copyright {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #ccc;
+    padding: 20px 20px;
+}
