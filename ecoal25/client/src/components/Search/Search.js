@@ -31,23 +31,23 @@ function Search() {
         <div className="search-container">
             <input 
                 type="text" 
-                placeholder="Rechercher un article..." 
+                placeholder="Search for an article..." 
                 value={query} 
                 onChange={(e) => setQuery(e.target.value)} 
                 className="search-input"
             />
-            {loading && <p>Chargement...</p>}
-            {error && <p className="error">Erreur : {error}</p>}
+            {loading && <p>Loading...</p>}
+            {error && <p className="error">Error : {error}</p>}
             <div className="search-results">
                 {articles.length > 0 ? (
                     articles.map((article) => (
                         <div key={article.id} className="search-item" onClick={() => navigate(`/article/${article.id}`)}>
                             <h3>{article.title}</h3>
-                            <p>{article.excerpt || 'Pas de description disponible'}</p>
+                            <p>{article.excerpt || 'Without any available description'}</p>
                         </div>
                     ))
                 ) : (
-                    query.length > 2 && <p>Aucun article trouvé</p>
+                    query.length > 2 && <p>No article found</p>
                 )}
             </div>
         </div>
