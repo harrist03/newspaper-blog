@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import styles from './Register.module.css';
+import '../Login/Login.css';  // Use the same CSS file as Login
 import logo from '../../assets/logo/Logo.png';
 
 function Register() {
@@ -43,64 +43,73 @@ function Register() {
             setIsLoading(false);
         }
     };
+
     return (
-        <div className={styles.div1}>
-            <div className={`${styles.corner} ${styles["top-left"]}`}></div>
-            <div className={`${styles.corner} ${styles["bottom-right"]}`}></div>
-
-
-            <img src={logo} className={styles.image} alt="Logo" />
-            <br />
-            <h1 className={styles.title}>Create Account</h1>
-            {error && <p className={styles.error}>{error}</p>}
-            <form onSubmit={handleSubmit}>
-                <div className={styles.inputGroup}>
-                    <input
-                        type="text"
-                        name='name'
-                        placeholder="Name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                    />
+        <>
+            <div className="login-container">
+                <div className="arrow" onClick={() => navigate(-1)}>
+                    <box-icon name='left-arrow-alt' size="lg"></box-icon>
                 </div>
+                {/* Corner */}
+                <div className="corner top-left"></div>
+                <div className="corner bottom-right"></div>
 
-                {/* <div className={styles.inputGroup}>
-                    <input 
-                        type="number" 
-                        placeholder="Phone Number" />
-                </div> */}
+                <div>
+                    {/* Logo */}
+                    <div>
+                        <img src={logo} className='image' alt="Logo" />
+                    </div>
+                    
+                    {error && <p className="error-message">{error}</p>}
+                    
+                    {/* Inputs */}
+                    <form onSubmit={handleSubmit}>
+                        <div className="input-group">
+                            <input
+                                type="text"
+                                name='name'
+                                placeholder="Name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        
+                        <div className="input-group">
+                            <input
+                                type="email"
+                                name='email'
+                                placeholder="Email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
 
-                <div className={styles.inputGroup}>
-                    <input
-                        type="email"
-                        name='email'
-                        placeholder="Email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                    />
+                        <div className="input-group">
+                            <input
+                                type="password"
+                                name='password'
+                                placeholder="Password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        
+                        <p className="create-account">Already have an account? <a href="/login">Login</a></p>
+
+                        <button
+                            className="login-btn"  // Reusing the login button style
+                            type='submit'
+                            disabled={isLoading}
+                        >
+                            {isLoading ? "Creating Account..." : "Create Account"}
+                        </button>
+                    </form>
                 </div>
-
-                <div className={styles.inputGroup}>
-                    <input
-                        type="password"
-                        name='password'
-                        placeholder="Password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-
-                <button
-                    className={styles.createAccountbtn}
-                    type='submit'
-                    disabled={isLoading}>
-                    {isLoading ? 'Creating Account...' : 'Create Account'}
-                </button>
-            </form>
-        </div>
+            </div>
+        </>
     );
 }
 

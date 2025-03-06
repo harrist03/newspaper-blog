@@ -7,6 +7,10 @@
     background-color: #fff;
     position: relative;
   }
+
+  a {
+    color: #5b362d;
+  }
   
   .corner {
     width: 80px;
