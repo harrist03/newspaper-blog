@@ -10,10 +10,11 @@ function Destroy() {
         axios
             .delete(`http://127.0.0.1:8000/api/article/${id}`)  
             .then((response) => {
+                alert("article deleted successfully");
                 navigate("/");
             })
             .catch((error) => {
-                console.error("Erreur lors de la suppression de l'article:", error);
+                console.error("Error deleting item:", error);
             });
     };
 

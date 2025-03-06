@@ -23,19 +23,19 @@ function Articles() {
     const handleSearchTitle = (title) => {
         axios.get(`http://127.0.0.1:8000/api/article/searchText/${title}`)
             .then(response => setArticles(response.data))
-            .catch(error => console.error("Erreur de recherche par titre:", error));
+            .catch(error => console.error("Error searching by title:", error));
     };
 
     const resetSearchTitle = () => {
         axios.get(`http://127.0.0.1:8000/api/article`)
             .then(response => setArticles(response.data))
-            .catch(error => console.error("Erreur de recherche par titre:", error));
+            .catch(error => console.error("Reset error", error));
     };
     
     const handleSearchTag = (tagName) => {
         axios.get(`http://127.0.0.1:8000/api/article/search/${tagName}`)
             .then(response => setArticles(response.data))
-            .catch(error => console.error("Erreur de recherche par tag:", error));
+            .catch(error => console.error("Error searching by tag:", error));
     };
     
 
@@ -138,7 +138,7 @@ function Articles() {
                         </div>
                     ))
                 ) : (
-                    <p className="no-articles">Aucun article trouvé</p>
+                    <p className="no-articles">No items found</p>
                 )}
             </div>
         </div>
