@@ -80,18 +80,16 @@ class ArticleController extends Controller
         $v =$request->validate([
             'title' => 'required|string',
             'content' => 'required|string',
-            'thumbnailURL' => 'required|string',
             'mediaType' => 'required|string',
-            'mediaURL' => 'required|string',
+            'mediaURL' => 'nullable|file|mimes:jpg,png,mp4,mp3,pdf,wav|max:20480',
+            "tags" => 'nullable|string'
         ]);
 
     $article->update([
         'title' => $request->input('title'),
         'content' => $request->input('content'),
-        'thumbnailURL' => $request->input('thumbnailURL'),
         'mediaType' => $request->input('mediaType'),
         'mediaURL' => $request->input('mediaURL'),
-        'leadStory' => $request->input('leadStory'),
     ]);
     return response()->json($article, 200);
     }
