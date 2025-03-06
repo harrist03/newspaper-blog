@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import Search from "../Search/Search";  
 import "./Articles.css";
+import APP_URL from "../../constant.js";
+import { useNavigate } from "react-router-dom";
+import Search from "../Search/Search";
 
-function ArticlesPage() {
+function Articles() {
     const navigate = useNavigate();
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -30,7 +31,7 @@ function ArticlesPage() {
     };
 
     const handleSearch = (tag) => {
-        fetchArticles(tag);  
+        fetchArticles(tag);
     };
 
     const formatDate = (dateString) => {
@@ -43,6 +44,10 @@ function ArticlesPage() {
             minute: "2-digit",
         }).format(date);
     };
+
+    function handleArticleClick($id) {
+        navigate("/article/" + $id)
+    }
 
     if (loading) return <p className="loading">Chargement...</p>;
     if (error) return <p className="error">Erreur : {error}</p>;
@@ -61,14 +66,26 @@ function ArticlesPage() {
             <div className="articles-list">
                 {articles.length > 0 ? (
                     articles.map((article) => (
-                        <div key={article.id} className="article-card">
-                            {article.mediaURL && (
-                                <img
-                                    src={article.mediaURL}
-                                    alt={article.mediaType}
-                                    className="article-image"
-                                />
-                            )}
+                        <div
+                            key={article.id}
+                            className="article-card"
+                            onClick={() => handleArticleClick(article.id)}
+                        >
+                            {article.mediaType === "image" && <img
+                                src={APP_URL + article.mediaURL}
+                                alt={article.mediaType || 'Article Media'}
+                                className="article-image"
+                            />}
+                            {article.mediaType === "sound" && <audio controls className="article-image">
+                                <source src={APP_URL + article.mediaURL} type="audio/mp3"/>
+                            </audio>}
+
+                            {article.mediaType === "video" && <video
+                                controls className="article-image">
+                                    <source  src={APP_URL + article.mediaURL} type="video/mp4" />
+                                </video>}
+
+
                             <div className="article-content">
                                 <h3>{article.title}</h3>
                                 <p className="article-date">{formatDate(article.updated_at)}</p>
@@ -76,7 +93,7 @@ function ArticlesPage() {
                                     <div className="tags-container">
                                         {article.tags.map((tag) => (
                                             <span
-                                                key={`${article.id}-${tag.id}`} 
+                                                key={`${article.id}-${tag.id}`}
                                                 className="tag"
                                                 onClick={() => handleSearch(tag.name)}
                                             >
@@ -96,4 +113,4 @@ function ArticlesPage() {
     );
 }
 
-export default ArticlesPage;
+export default Articles;

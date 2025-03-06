@@ -24,8 +24,7 @@ function Login() {
                         <div className="input-group">
                             <input type="password" placeholder="Password" />
                         </div>
-
-                        <p className="create-account">Create Account</p>
+                        <p className="create-account"><a href="/register">Create Account</a></p>
 
                         <button className="login-btn">Login</button>
                     </form>

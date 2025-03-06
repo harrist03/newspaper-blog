@@ -9,6 +9,7 @@ function NewArticle() {
     const [formData, setFormData] = useState({
         title: "",
         content : "",
+        mediaType : "",
         tags: "",
         })
 
@@ -28,7 +29,7 @@ function NewArticle() {
         data.append('content', formData.content);
         data.append('tags', formData.tags);
         data.append('thumbnailURL', formData.file);
-        data.append("mediaType", "image");
+        data.append("mediaType", formData.mediaType);
         data.append('mediaURL', file);
         data.append("leadStory", 0);
 
@@ -59,6 +60,16 @@ function NewArticle() {
                     <div className="form-group">
                         <label>Photo / video / sound :</label>
                         <input type="file" placeholder="Url / file / etc..." name="file" onChange={(e) => setFile(e.target.files[0])} />
+                    </div>
+
+                    <div className="form-group">
+                        <label>Media Type</label>
+                        <select name="mediaType" onChange={handleChange}>
+                            <option value="">Select a type</option>
+                            <option value="image">Image</option>
+                            <option value="sound">Sound</option>
+                            <option value="video">Video</option>
+                        </select>
                     </div>
 
                     <div className="form-group">
