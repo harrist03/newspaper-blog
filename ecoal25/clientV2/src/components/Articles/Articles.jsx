@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Articles.css";
-import { useNavigate } from "react-router-dom";
 import Search from "../Search/Search";
 import './Articles.css';
 import {useNavigate} from 'react-router-dom';
