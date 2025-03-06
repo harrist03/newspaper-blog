@@ -27,7 +27,7 @@ class ArticleController extends Controller
             'title' => 'required|string',
             'content' => 'required|string',
             'mediaType' => 'required|string',
-            'mediaURL' => 'nullable|file|mimes:jpg,png,mp4,mp3,pdf|max:20480',
+            'mediaURL' => 'nullable|file|mimes:jpg,png,mp4,mp3,pdf,wav|max:20480',
             "tags" => 'string'
         ]);
 
@@ -58,10 +58,10 @@ class ArticleController extends Controller
             $newArticle->tags()->attach($tag->id);
         }
 
-        return response()->json($newArticle, 201)
-            ->header('Access-Control-Allow-Origin', '*')
-            ->header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT')
-            ->header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+        return response()->json($newArticle, 201);
+        //    ->header('Access-Control-Allow-Origin', '*')
+          //  ->header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT')
+            //->header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     }
 
     /**

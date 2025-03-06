@@ -74,13 +74,21 @@ function Articles() {
                             className="article-card"
                             onClick={() => handleArticleClick(article.id)}
                         >
-                            {article.mediaURL && (
-                                <img
-                                    src={APP_URL+article.mediaURL}
-                                    alt={article.mediaType || 'Article Image'}
-                                    className="article-image"
-                                />
-                            )}
+                            {article.mediaType === "image" && <img
+                                src={APP_URL + article.mediaURL}
+                                alt={article.mediaType || 'Article Media'}
+                                className="article-image"
+                            />}
+                            {article.mediaType === "sound" && <audio controls className="article-image">
+                                <source src={APP_URL + article.mediaURL} type="audio/mp3"/>
+                            </audio>}
+
+                            {article.mediaType === "video" && <video
+                                controls className="article-image">
+                                    <source  src={APP_URL + article.mediaURL} type="video/mp4" />
+                                </video>}
+
+
                             <div className="article-content">
                                 <h3>{article.title}</h3>
                                 <p className="article-date">{formatDate(article.updated_at)}</p>
