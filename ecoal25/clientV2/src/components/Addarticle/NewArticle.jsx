@@ -1,19 +1,25 @@
 import './NewArticle.css';
-import {useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function NewArticle() {
     const navigate = useNavigate();
     const [file, setFile] = useState(null);
     const [name, setName] = useState("");
     const [status, setStatus] = useState("");
+    const [IsLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        setIsLoggedIn(token);
+    }, []);
     const [formData, setFormData] = useState({
         title: "",
-        content : "",
-        mediaType : "",
+        content: "",
+        mediaType: "",
         tags: "",
-        })
+    })
 
     function handleChange(e) {
         setFormData({
@@ -51,44 +57,50 @@ function NewArticle() {
 
     return (
         <>
-            <div className="article-container">
-                <h1>Article Creation</h1>
+            {IsLoggedIn ? (
+                <div className="article-container">
+                    <h1>Article Creation</h1>
 
-                <form className="article-form" onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label>Title :</label>
-                        <input type="text" placeholder="Article title" name="title" onChange={handleChange} />
-                    </div>
+                    <form className="article-form" onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label>Title :</label>
+                            <input type="text" placeholder="Article title" name="title" onChange={handleChange} />
+                        </div>
 
-                    <div className="form-group">
-                        <label for="file">Add a media</label>
-                        <input id="file" type="file" placeholder="Url / file / etc..." name="file" onChange={(e) => setFile(e.target.files[0])} />
-                    </div>
+                        <div className="form-group">
+                            <label for="file">Add a media</label>
+                            <input id="file" type="file" placeholder="Url / file / etc..." name="file" onChange={(e) => setFile(e.target.files[0])} />
+                        </div>
 
-                    <div className="form-group">
-                        <label>Media Type</label>
-                        <select name="mediaType" onChange={handleChange}>
-                            <option value="">Select a type</option>
-                            <option value="image">Image</option>
-                            <option value="sound">Sound</option>
-                            <option value="video">Video</option>
-                        </select>
-                    </div>
+                        <div className="form-group">
+                            <label>Media Type</label>
+                            <select name="mediaType" onChange={handleChange}>
+                                <option value="">Select a type</option>
+                                <option value="image">Image</option>
+                                <option value="sound">Sound</option>
+                                <option value="video">Video</option>
+                            </select>
+                        </div>
 
-                    <div className="form-group">
-                        <label>Article text :</label>
-                        <textarea placeholder="Content of the article" name="content" onChange={handleChange}></textarea>
-                    </div>
+                        <div className="form-group">
+                            <label>Article text :</label>
+                            <textarea placeholder="Content of the article" name="content" onChange={handleChange}></textarea>
+                        </div>
 
-                    <div className="form-group">
-                        <label>Balise :</label>
-                        <input type="text" placeholder="example #Friends , #MMI ..." name="tags" onChange={handleChange}/>
-                    </div>
+                        <div className="form-group">
+                            <label>Balise :</label>
+                            <input type="text" placeholder="example #Friends , #MMI ..." name="tags" onChange={handleChange} />
+                        </div>
 
-                    <button type="submit" className="submit-button">Create Article</button>
-                </form>
-            </div>
-
+                        <button type="submit" className="submit-button">Create Article</button>
+                    </form>
+                </div>
+            ) : (
+                <div className="article-container">
+                    <p>You must be logged in to create an article.</p>
+                    <Link to="/login">Login</Link>
+                </div>
+            )}
         </>
     )
 }
