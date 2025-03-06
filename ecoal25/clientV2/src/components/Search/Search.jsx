@@ -8,36 +8,35 @@ function Search({ onSearch }) {
 
     useEffect(() => {
         axios
-            .get("http://127.0.0.1:8000/api/tag")
+            .get("http://127.0.0.1:8000/api/tag")  
             .then((response) => setTags(response.data))
             .catch((error) => console.error("Erreur de chargement des tags:", error));
     }, []);
 
     const handleSearch = () => {
         if (searchTerm.trim() !== "") {
-            onSearch(searchTerm);
+            onSearch(searchTerm);  
         }
-    };
-
-    const handleTagClick = (tagName) => {
-        setSearchTerm(tagName);
-        onSearch(tagName);
     };
 
     return (
         <div className="search-container">
             <input
                 type="text"
-                placeholder="Rechercher un article par tag..."
+                placeholder="Rechercher un article par tag"
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={(e) => setSearchTerm(e.target.value)} 
             />
             <button onClick={handleSearch}>Rechercher</button>
             <button onClick={() => onSearch("")}>Réinitialiser</button>
 
             <div className="tags-list">
                 {tags.map((tag) => (
-                    <span key={tag.id} className="tag" onClick={() => handleTagClick(tag.name)}>
+                    <span
+                        key={tag.id}  
+                        className="tag"
+                        onClick={() => onSearch(tag.name)}  
+                    >
                         {tag.name}
                     </span>
                 ))}
@@ -47,4 +46,3 @@ function Search({ onSearch }) {
 }
 
 export default Search;
-

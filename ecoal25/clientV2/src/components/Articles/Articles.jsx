@@ -1,42 +1,36 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./Articles.css";
 import { useNavigate } from "react-router-dom";
-import Search from "../Search/Search";
-import './Articles.css';
-import {useNavigate} from 'react-router-dom';
-import APP_URL from "../../constant.js";
+import Search from "../Search/Search";  
+import "./Articles.css";
 
-function Articles() {
+function ArticlesPage() {
     const navigate = useNavigate();
     const [articles, setArticles] = useState([]);
-    const [filteredArticles, setFilteredArticles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        axios
-            .get("http://127.0.0.1:8000/api/article")
-            .then((response) => {
-                setArticles(response.data);
-                setFilteredArticles(response.data);
-                setLoading(false);
-            })
-            .catch((err) => {
-                setError("Impossible de charger les articles. Vérifiez la connexion.");
-                setLoading(false);
-            });
+        fetchArticles();
     }, []);
 
-    const handleSearch = (tagName) => {
-        if (tagName === "") {
-            setFilteredArticles(articles);
-        } else {
-            axios
-                .get(`http://127.0.0.1:8000/api/search/${tagName}`)
-                .then((response) => setFilteredArticles(response.data))
-                .catch((err) => console.error("Erreur lors du filtrage:", err));
+    const fetchArticles = async (tag = "") => {
+        setLoading(true);
+        try {
+            let url = "http://127.0.0.1:8000/api/article";
+            if (tag) {
+                url = `http://127.0.0.1:8000/api/article/search/${tag}`;
+            }
+            const response = await axios.get(url);
+            setArticles(response.data);
+        } catch (err) {
+            setError(err.message);
         }
+        setLoading(false);
+    };
+
+    const handleSearch = (tag) => {
+        fetchArticles(tag);  
     };
 
     const formatDate = (dateString) => {
@@ -50,17 +44,14 @@ function Articles() {
         }).format(date);
     };
 
-    const handleClick = () => navigate("/newarticle");
-    const handleArticleClick = (id) => navigate("/article/" + id);
-
     if (loading) return <p className="loading">Chargement...</p>;
-    if (error) return <p className="error">{error}</p>;
+    if (error) return <p className="error">Erreur : {error}</p>;
 
     return (
         <div className="home-container">
             <header className="header">
                 <h1>Articles</h1>
-                <button className="add-article" onClick={handleClick}>
+                <button className="add-article" onClick={() => navigate("/newarticle")}>
                     + Ajouter un article
                 </button>
             </header>
@@ -68,17 +59,13 @@ function Articles() {
             <Search onSearch={handleSearch} />
 
             <div className="articles-list">
-                {filteredArticles.length > 0 ? (
-                    filteredArticles.map((article) => (
-                        <div
-                            key={article.id}
-                            className="article-card"
-                            onClick={() => handleArticleClick(article.id)}
-                        >
+                {articles.length > 0 ? (
+                    articles.map((article) => (
+                        <div key={article.id} className="article-card">
                             {article.mediaURL && (
                                 <img
-                                    src={APP_URL+article.mediaURL}
-                                    alt={article.mediaType || 'Article Image'}
+                                    src={article.mediaURL}
+                                    alt={article.mediaType}
                                     className="article-image"
                                 />
                             )}
@@ -88,7 +75,11 @@ function Articles() {
                                 {article.tags && article.tags.length > 0 && (
                                     <div className="tags-container">
                                         {article.tags.map((tag) => (
-                                            <span key={tag.id} className="tag">
+                                            <span
+                                                key={`${article.id}-${tag.id}`} 
+                                                className="tag"
+                                                onClick={() => handleSearch(tag.name)}
+                                            >
                                                 {tag.name}
                                             </span>
                                         ))}
@@ -105,4 +96,4 @@ function Articles() {
     );
 }
 
-export default Articles;
+export default ArticlesPage;
