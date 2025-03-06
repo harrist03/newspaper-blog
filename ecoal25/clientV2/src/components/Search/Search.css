@@ -1,0 +1,41 @@
+body{
+    background-color: #FFFFD9;
+}
+
+.search-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    padding: 8px 12px;
+    background-color: #D3C1AE;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+    border-radius: 5px;
+}
+
+
+.tags-list {
+    margin-top: 10px;
+}
+
+.tag {
+    display: inline-block;
+    background: #D3C1AE;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin: 3px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}

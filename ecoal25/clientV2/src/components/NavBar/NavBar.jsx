@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import Login from "../login_page/Login";
+import Login from "../Login/Login";
 import 'boxicons'
 import styles from './NavBar.module.css'
 import {useState} from "react";

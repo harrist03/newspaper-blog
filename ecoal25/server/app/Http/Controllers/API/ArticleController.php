@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
@@ -25,20 +26,26 @@ class ArticleController extends Controller
         $v =$request->validate([
             'title' => 'required|string',
             'content' => 'required|string',
-            'thumbnailURL' => 'required|string',
             'mediaType' => 'required|string',
-            'mediaURL' => 'required|string',
+            'mediaURL' => 'nullable|file|mimes:jpg,png,mp4,mp3,pdf|max:20480',
             "tags" => 'string'
         ]);
 
-        $hashName = $request->file('thumbnailURL')->hashName();
-        $filename = $request->file('thumbnailURL')->storeAs('public/storage/images', $hashName);
+        if ($request->hasFile('mediaURL')) {
+            $hashName = $request->file('mediaURL')->hashName();
+            $request->file('mediaURL')->storeAs('public/images', $hashName);
+            $fileURL = Storage::url('images/'.$hashName);
+        }
+        else {
+            $fileURL = null;
+        }
+
 
         $newArticle = Article::create(['title' => $request->input('title'),
                         'content' => $request->input('content'),
-                        'thumbnailURL' => $request->input('thumbnailURL'),
+                        'thumbnailURL' => $fileURL,
                         'mediaType' => $request->input('mediaType'),
-                        'mediaURL' => $request->input('mediaURL'),
+                        'mediaURL' => $fileURL,
                         'leadStory' => $request->input('leadStory'),
         ]);
 
@@ -96,5 +103,18 @@ class ArticleController extends Controller
     {
         $article->delete();
         return response()->json(null, 204);
+    }
+
+    public function search( $slugTag)
+    {
+        $tags = Tag::where('name', $slugTag)->get();
+        if (count($tags) == 0)
+            return [];
+        $articles = $tags[0]->articles;
+          return $articles;
+    }
+
+    public function searchText($search) {
+        return Article::where('title', 'like', "%".$search."%")->get();
     }
 }
