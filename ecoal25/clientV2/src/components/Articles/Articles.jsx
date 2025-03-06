@@ -19,6 +19,24 @@ function Articles() {
         setIsLoggedIn(token);
     }, []);
 
+    const handleSearchTitle = (title) => {
+        axios.get(`http://127.0.0.1:8000/api/article/searchText/${title}`)
+            .then(response => setArticles(response.data))
+            .catch(error => console.error("Erreur de recherche par titre:", error));
+    };
+
+    const resetSearchTitle = () => {
+        axios.get(`http://127.0.0.1:8000/api/article`)
+            .then(response => setArticles(response.data))
+            .catch(error => console.error("Erreur de recherche par titre:", error));
+    };
+    
+    const handleSearchTag = (tagName) => {
+        axios.get(`http://127.0.0.1:8000/api/article/search/${tagName}`)
+            .then(response => setArticles(response.data))
+            .catch(error => console.error("Erreur de recherche par tag:", error));
+    };
+    
 
     const fetchArticles = async (tag = "") => {
         setLoading(true);
@@ -74,7 +92,7 @@ function Articles() {
                 
             </header>
 
-            <Search onSearch={handleSearch} />
+            <Search onSearchTitle={handleSearchTitle} onSearchTag={handleSearchTag} onReset={resetSearchTitle} />
 
             <div className="articles-list">
                 {articles.length > 0 ? (
