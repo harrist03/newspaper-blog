@@ -28,13 +28,13 @@ function NavBar() {
             <div className={styles.burger}>
                 <box-icon onClick={handleClick} name={pressed ? "x" : "menu"} size={'lg'} color={pressed ? '#ffffff' : "#000000"}></box-icon>
             </div>
-            <>
+            <div>
                 <nav className={`${styles.navbar} ${pressed ? styles.open : ""}`}>
                     <ul>
                         <li>
                             <Link onClick={handleClick} to="/">Home</Link>
                         </li>
-
+                        
                         <li>
                             <Link onClick={handleClick} to="/article">Articles</Link>
                         </li>
@@ -58,7 +58,7 @@ function NavBar() {
                         )}
                     </ul>
                 </nav>
-            <
+            </div>
         </>
     )
 }
