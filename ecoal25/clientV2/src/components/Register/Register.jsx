@@ -52,9 +52,6 @@ function Register() {
             <img src={logo} className={styles.image} alt="Logo" />
             <br />
             <h1 className={styles.title}>Create Account</h1>
-            <form>
-            <h1>Create Account</h1>
-
             {error && <p className={styles.error}>{error}</p>}
             <form onSubmit={handleSubmit}>
                 <div className={styles.inputGroup}>
@@ -95,11 +92,9 @@ function Register() {
                         required
                     />
                 </div>
-                <p className={styles.loginRedirect}><a href="/login">Login</a></p>
-                <button className={styles.createAccountbtn}>Create Account</button>
 
                 <button
-                    className={styles.loginbtn}
+                    className={styles.createAccountbtn}
                     type='submit'
                     disabled={isLoading}>
                     {isLoading ? 'Creating Account...' : 'Create Account'}
