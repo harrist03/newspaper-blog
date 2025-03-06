@@ -10,10 +10,15 @@ function Articles() {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [IsLoggedIn, setIsLoggedIn] = useState(false);
+
 
     useEffect(() => {
         fetchArticles();
+        const token = localStorage.getItem('token');
+        setIsLoggedIn(token);
     }, []);
+
 
     const fetchArticles = async (tag = "") => {
         setLoading(true);
@@ -59,9 +64,14 @@ function Articles() {
         </div>
             <header className="header">
                 <h1>Articles</h1>
+                {IsLoggedIn ? (
                 <button className="add-article" onClick={() => navigate("/newarticle")}>
                     + Ajouter un article
                 </button>
+                ) : (
+                    <></>
+                )}
+                
             </header>
 
             <Search onSearch={handleSearch} />

@@ -51,7 +51,7 @@ function NavBar() {
                         </li>
                         {IsLoggedIn && (
                             <li>
-                                <Link onClick={handleClick} to="/create-article">Create Article</Link>
+                                <Link onClick={handleClick} to="/newarticle">Create Article</Link>
                             </li>
                         )}
                     </ul>
