@@ -5,3 +5,52 @@
     left: 0;
     cursor: pointer;
 }
+
+.article-logo img{
+    width: 10rem;
+    margin-top:0.5rem ;
+}
+
+.article {
+    margin-top: 1rem;
+}
+
+.article img {
+    border-radius: 0;
+    max-height: 250px;
+}
+
+.article video {
+    border-radius: 0;
+    max-height: 250px;
+}
+
+.article audio {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.article h1 {
+    font-size: 2rem;
+    margin: 0 auto;
+    font-family: Impact,serif;
+    width: 80%;
+}
+
+.article p {
+    width: 90%;
+    margin: 1rem auto;
+    text-align: left;
+}
+
+.article-tag span{
+    background-color: #D3C1AE;
+    padding: 5px;
+    border-radius: 15px;
+    font-weight: bold;
+    color: white;
+}
+
+.date {
+    filter: opacity(0.4);
+}

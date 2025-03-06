@@ -41,7 +41,7 @@ function Articles() {
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
-        return new Intl.DateTimeFormat("fr-FR", {
+        return new Intl.DateTimeFormat("en-EN", {
             year: "numeric",
             month: "long",
             day: "numeric",
@@ -71,7 +71,7 @@ function Articles() {
                 ) : (
                     <></>
                 )}
-                
+
             </header>
 
             <Search onSearch={handleSearch} />
