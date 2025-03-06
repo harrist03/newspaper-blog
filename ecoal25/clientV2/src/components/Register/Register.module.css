@@ -1,0 +1,97 @@
+@media only screen and (max-width: 600px) {
+    .div1 {
+        background-color: #ffffff;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+    }
+    h1{
+        margin-bottom: 45px;
+        font-family: 'Garet', sans-serif;
+
+
+    }
+    .button {
+        background-color: #3D211A;
+        color: white;
+    }
+
+    .image {
+        width: 150px;
+        position: absolute;
+        top: 150px;
+    }
+
+    .corner {
+        width: 80px;
+        height: 80px;
+        background-color: #5b362d;
+        position: absolute;
+    }
+
+    .top-left {
+        top: 0;
+        left: 0;
+        border-bottom-right-radius: 50px;
+    }
+
+    .bottom-right {
+        bottom: 0;
+        right: 0;
+        border-top-left-radius: 50px;
+    }
+
+
+    .loginbtn {
+        width: 90%;
+        background: #5b362d;
+        color: white;
+        border: none;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-family: 'Garet', sans-serif;
+        margin-top: 50px;
+    }
+
+    .input-group {
+        text-align: left;
+        margin-bottom: 10px;
+        font-family: 'Garet', sans-serif;
+    }
+
+    .input-group input {
+        width: 100%;
+        border: none;
+        outline: none;
+        padding: 8px 5px;
+        font-size: 14px;
+        font-family: 'Garet', sans-serif;
+    }
+
+    form {
+        width: 80%;
+        max-width: 300px;
+        text-align: center;
+        position: relative;
+    }
+
+    /* Remove as setas do input number */
+    input[type="number"] {
+        -moz-appearance: textfield;
+        /* Para Firefox */
+        appearance: textfield;
+        /* Para outros navegadores */
+    }
+
+    /* Remove as setas do input number no Chrome, Safari e Edge */
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
