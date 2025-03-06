@@ -29,7 +29,7 @@ function Search({ onSearchTitle, onSearchTag, onReset }) {
             <input
                 type="text"
 
-                placeholder="Search an article with a tag"
+                placeholder="Search an article with a title"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)} 
             />
