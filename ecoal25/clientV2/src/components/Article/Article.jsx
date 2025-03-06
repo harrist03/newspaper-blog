@@ -1,10 +1,12 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import './Article.css';
+import APP_URL from "../../constant.js";
+import logo from '../../assets/logo/Logo.png';
 
 function Article(props) {
-    const { id } = useParams(); // Récupère l'ID de l'URL
+    const { id } = useParams();
     const [article, setArticle] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -22,6 +24,17 @@ function Article(props) {
             });
     }, [id]);
 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return new Intl.DateTimeFormat("en-EN", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+        }).format(date);
+    };
+
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error}</p>;
     return (
@@ -29,12 +42,34 @@ function Article(props) {
             <div className="arrow" onClick={() => navigate(-1)}>
                 <box-icon name='left-arrow-alt' size="lg"></box-icon>
             </div>
-            <h1 onClick={() => navigate(-1)}>{article.title}</h1>
-            <img src={article.mediaURL} alt={article.mediaType || "Article Image"}/>
-            <p>{article.content}</p>
-            <p>{article.tags.map(t => {
-                return <span key={t.id}> {t.name}</span>
-            })}</p>
+            <div className="article-logo">
+                <img src={logo} alt="logo"></img>
+            </div>
+            <div
+                key={article.id}
+                className="article"
+                onClick={() => handleArticleClick(article.id)}>
+
+                {article.mediaType === "image" && <img
+                    src={APP_URL + article.mediaURL}
+                    alt={article.mediaType || 'Article Media'}
+                    className="article-image"
+                />}
+                {article.mediaType === "sound" && <audio controls className="article-image">
+                    <source src={APP_URL + article.mediaURL} type="audio/mp3"/>
+                </audio>}
+
+                {article.mediaType === "video" && <video
+                    controls className="article-image">
+                    <source src={APP_URL + article.mediaURL} type="video/mp4"/>
+                </video>}
+                <h1>{article.title}</h1>
+                <p className="article-tag">{article.tags.map(t => {
+                    return <span key={t.id}> #{t.name}</span>
+                })}</p>
+                <p className="date">{formatDate(article.updated_at)}</p>
+                <p>{article.content}</p>
+            </div>
         </div>
     );
 }

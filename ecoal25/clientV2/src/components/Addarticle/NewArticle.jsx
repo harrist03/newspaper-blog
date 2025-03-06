@@ -1,8 +1,10 @@
 import './NewArticle.css';
 import {useState} from "react";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 function NewArticle() {
+    const navigate = useNavigate();
     const [file, setFile] = useState(null);
     const [name, setName] = useState("");
     const [status, setStatus] = useState("");
@@ -41,6 +43,7 @@ function NewArticle() {
             });
 
             alert("Article created successfully !");
+            navigate("/article")
         } catch (error) {
             alert("An error occurred while creating the article");
         }
@@ -58,8 +61,8 @@ function NewArticle() {
                     </div>
 
                     <div className="form-group">
-                        <label>Photo / video / sound :</label>
-                        <input type="file" placeholder="Url / file / etc..." name="file" onChange={(e) => setFile(e.target.files[0])} />
+                        <label for="file">Add a media</label>
+                        <input id="file" type="file" placeholder="Url / file / etc..." name="file" onChange={(e) => setFile(e.target.files[0])} />
                     </div>
 
                     <div className="form-group">
