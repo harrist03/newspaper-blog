@@ -1,4 +1,4 @@
-@media only screen and (max-width: 600px) {
+@media (max-width: 600px) {
     .div1 {
         background-color: #ffffff;
         height: 100vh;
@@ -8,12 +8,20 @@
         flex-direction: column;
         position: relative;
     }
-    h1{
+
+    .title {
         margin-bottom: 45px;
         font-family: 'Garet', sans-serif;
-
-
     }
+
+    .loginRedirect {
+        font-size: 14px;
+        color: #777;
+        cursor: pointer;
+        margin-bottom: 15px;
+        font-family: 'Garet', sans-serif;
+      }
+
     .button {
         background-color: #3D211A;
         color: white;
@@ -44,8 +52,7 @@
         border-top-left-radius: 50px;
     }
 
-
-    .loginbtn {
+    .createAccountbtn {
         width: 90%;
         background: #5b362d;
         color: white;
@@ -53,20 +60,20 @@
         padding: 10px;
         font-size: 16px;
         border-radius: 5px;
-        cursor: pointer;
-        font-family: 'Garet', sans-serif;
-        margin-top: 50px;
-    }
-
-    .input-group {
-        text-align: left;
-        margin-bottom: 10px;
+        cursor: pointer;        
         font-family: 'Garet', sans-serif;
     }
 
-    .input-group input {
-        width: 100%;
+
+    /* Inputs */
+    .inputGroup {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .inputGroup input {
         border: none;
+        border-bottom: 2px solid #aaa;
         outline: none;
         padding: 8px 5px;
         font-size: 14px;
@@ -74,7 +81,6 @@
     }
 
     form {
-        width: 80%;
         max-width: 300px;
         text-align: center;
         position: relative;
@@ -90,4 +96,5 @@
         -webkit-appearance: none;
         margin: 0;
     }
+
 }
