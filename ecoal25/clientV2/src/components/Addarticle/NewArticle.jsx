@@ -29,7 +29,7 @@ function NewArticle() {
     }
 
     async function handleSubmit(e) {
-        setStatus(""); // Reset status
+        setStatus(""); 
         e.preventDefault();
 
         const data = new FormData();

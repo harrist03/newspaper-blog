@@ -4,6 +4,7 @@ import axios from "axios";
 import './Article.css';
 import APP_URL from "../../constant.js";
 import logo from '../../assets/logo/Logo.png';
+import Destroy from "../Destroy/Destroy";
 
 function Article(props) {
     const { id } = useParams();
@@ -11,6 +12,7 @@ function Article(props) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const navigate = useNavigate()
+    const [IsLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/article/${id}`)
@@ -22,6 +24,9 @@ function Article(props) {
                 setError("Article not found");
                 setLoading(false);
             });
+
+            const token = localStorage.getItem('token');
+            setIsLoggedIn(token);
     }, [id]);
 
     const formatDate = (dateString) => {
@@ -69,6 +74,11 @@ function Article(props) {
                 })}</p>
                 <p className="date">{formatDate(article.updated_at)}</p>
                 <p>{article.content}</p>
+                {IsLoggedIn ? (
+                <Destroy id={article.id} />
+                ) : (
+                    <></>
+                )}
             </div>
         </div>
     );
