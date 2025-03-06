@@ -49,6 +49,9 @@ function Login() {
     return (
         <>
             <div className="login-container">
+            <div className="arrow" onClick={() => navigate(-1)}>
+                <box-icon name='left-arrow-alt' size="lg"></box-icon>
+            </div>
                 {/* Corner */}
                 <div className="corner top-left"></div>
                 <div className="corner bottom-right"></div>
