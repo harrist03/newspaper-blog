@@ -1,39 +1,62 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Login from "../Login/Login";
 import 'boxicons'
 import styles from './NavBar.module.css'
-import {useState} from "react";
+import { useEffect, useState } from "react";
 
 function NavBar() {
-    let [pressed, setPressed] = useState(false);
-    function handleClick(){
-        setPressed(!pressed);
-        }
+    const [pressed, setPressed] = useState(false);
+    const [IsLoggedIn, setIsLoggedIn] = useState(false);
 
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        setIsLoggedIn(token);
+    }, []);
+
+    function handleClick() {
+        setPressed(!pressed);
+    }
+
+    function handleLogout() {
+        localStorage.removeItem('token');
+        setIsLoggedIn(false);
+        handleClick();
+    }
 
     return (
         <>
-        <div className={styles.burger}>
-            <box-icon onClick={handleClick} name={pressed ? "x" : "menu"} size={'lg'} color={pressed ? '#ffffff' : "#000000"}></box-icon>
-        </div>
-    <div>
-        <nav className={`${styles.navbar} ${pressed ? styles.open : ""}`}>
-            <ul>
-                <li>
-                    <Link onClick={handleClick} to="/">Home</Link>
-                </li>
-                <li>
-                <Link onClick={handleClick} to="/login">Login / Register</Link>
-                    </li>
-                    <li>
-                        <Link onClick={handleClick} to="/article">Articles</Link>
-                    </li>
-                    <li>
-                        <Link onClick={handleClick} to="/newArticle">Create an article</Link>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+            <div className={styles.burger}>
+                <box-icon onClick={handleClick} name={pressed ? "x" : "menu"} size={'lg'} color={pressed ? '#ffffff' : "#000000"}></box-icon>
+            </div>
+            <div>
+                <nav className={`${styles.navbar} ${pressed ? styles.open : ""}`}>
+                    <ul>
+                        <li>
+                            <Link onClick={handleClick} to="/">Home</Link>
+                        </li>
+
+                        {IsLoggedIn ? (
+                            <>
+                                <li>
+                                    <Link onClick={handleLogout}>Logout</Link>
+                                </li>
+                            </>
+                        ) : (
+                            <li>
+                                <Link onClick={handleClick} to="/login">Login / Register</Link>
+                            </li>
+                        )}
+                        <li>
+                            <Link onClick={handleClick} to="/article">Articles</Link>
+                        </li>
+                        {IsLoggedIn && (
+                            <li>
+                                <Link onClick={handleClick} to="/create-article">Create Article</Link>
+                            </li>
+                        )}
+                    </ul>
+                </nav>
+            </div>
         </>
     )
 }
