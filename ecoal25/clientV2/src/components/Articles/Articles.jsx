@@ -5,6 +5,7 @@ import APP_URL from "../../constant.js";
 import { useNavigate } from "react-router-dom";
 import Search from "../Search/Search";
 
+
 function Articles() {
     const navigate = useNavigate();
     const [articles, setArticles] = useState([]);

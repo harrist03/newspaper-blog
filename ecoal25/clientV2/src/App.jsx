@@ -7,7 +7,7 @@ import NavBar from "./components/NavBar/NavBar";
 import Article from "./components/Article/Article";
 import Register from "./components/Register/Register";
 import Articles from "./components/Articles/Articles";
-
+import Destroy from "./components/Destroy/Destroy";
 function App() {
     return (
         <>
@@ -20,6 +20,7 @@ function App() {
                     <Route path="/article" element={<Articles/>}/>
                     <Route path="/article/:id" element={<Article/>}/>
                     <Route path="/newarticle" element={<NewArticle/>}/>
+                    <Route path="/destroy" element={<Destroy/>}/>
                 </Routes>
             </div>
         </>
